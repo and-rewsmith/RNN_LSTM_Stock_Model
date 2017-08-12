@@ -14,11 +14,14 @@ from keras.layers.core import Dense, Dropout, Activation
 from keras.layers.recurrent import LSTM
 from sklearn.preprocessing import Normalizer
 from keras.layers.advanced_activations import LeakyReLU
+from sklearn.preprocessing import MinMaxScaler
+import copy
+
 
 
 def get_stock_data(stock_name, normalized=0):
     print("GETTING STOCK DATA")
-    url = "http://www.google.com/finance/historical?q=" + stock_name + "&startdate=Jul+12%2C+2013&enddate=Jul+11%2C+2017&num=30&ei=rCtlWZGSFN3KsQHwrqWQCw&output=csv"
+    url = "http://www.google.com/finance/historical?q=" + stock_name + "&startdate=Jul+12%2C+2003&enddate=Jul+11%2C+2017&num=30&ei=rCtlWZGSFN3KsQHwrqWQCw&output=csv"
 
     col_names = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
     stocks = pd.read_csv(url, header=0, names=col_names)
@@ -84,7 +87,7 @@ def build_model(layers):
     model.add(Activation('tanh'))
     model.add(Dense(1, kernel_initializer="uniform"))
     model.add(LeakyReLU(alpha=0.3))
-    model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
+    model.compile(loss='mse', optimizer='rmsprop', metrics=['accuracy'])
     return model
 
 
@@ -101,6 +104,22 @@ df = get_stock_data(stock_name, 0)
 window = 5
 X_train, y_train, X_test, y_test = load_data(df[::-1], window, file, train_percent=.9)
 
+X_train_unprocessed = np.copy(X_train)
+X_test_unprocessed = np.copy(X_test)
+
+#scale values down for lstm
+mmscaler = MinMaxScaler(feature_range=(0, 1))
+
+for i in range(0, len(X_train)):
+    temp = np.hstack(X_train[i])
+    temp = (mmscaler.fit_transform(temp))
+    X_train[i] = np.split(temp, 5)
+
+for i in range(0, len(X_test)):
+    temp = np.hstack(X_test[i])
+    temp = (mmscaler.fit_transform(temp))
+    X_test[i] = np.split(temp, 5)
+
 print("X_train", X_train.shape)
 print("y_train", y_train.shape)
 print("X_test", X_test.shape)
@@ -112,7 +131,7 @@ model.fit(
     X_train,
     y_train,
     batch_size=512,
-    epochs=500,
+    epochs=300,
     validation_split=0.1,
     verbose=100)
 
@@ -138,7 +157,7 @@ for i in range(0, len(X_test)):
     file.write("\n")
 
 for i in range(0, len(p)):
-    start_price = X_test[i][-1][2]
+    start_price = X_test_unprocessed[i][-1][2]
     p[i] = (start_price/100 * p[i] + start_price)
     y_test[i] = (start_price/100 * y_test[i] + start_price)
 
