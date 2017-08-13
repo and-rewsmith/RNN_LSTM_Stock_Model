@@ -1,15 +1,10 @@
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
+from ArrayNormalizer import ArrayNormalizer
 
-arr = [[0,1,3],
-        [4,5,6]]
+arr1 = [ [[0,2],[3,4]], [[5,6],[7,8]], [[6,8],[9,10]], [[12,15],[7,3]] ]
+arr1 =np.asarray(arr1)
 
-arr = np.asarray(arr)
 
-arr = (np.hstack(arr))
-mmscaler = MinMaxScaler(feature_range=(0, 1))
-#
-# print(arr)
-# print()
-#
-print((mmscaler.fit_transform(arr)))
+norm = ArrayNormalizer(arr1)
+print(norm.transform(arr1))
