@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0da2773a-de99-484c-9153-ecb3ca595db1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/got3/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/got3/manager/TweetCriteria.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/got3/manager/TweetManager.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/got3/manager/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/got3/manager/__init__.py.bak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/got3/models/Tweet.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/got3/models/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/main.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rnn_output.txt" afterPath="$PROJECT_DIR$/output_files/rnn_output.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rnn_output2.txt" afterPath="$PROJECT_DIR$/output_files/rnn_output2.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rnn_output3.txt" afterPath="$PROJECT_DIR$/output_files/rnn_output3.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rnn_output4.txt" afterPath="$PROJECT_DIR$/output_files/rnn_output4.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ArrayNormalizer.py" afterPath="$PROJECT_DIR$/ArrayNormalizer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rnn_output3.txt" afterPath="$PROJECT_DIR$/rnn_output3.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rnn_output4.txt" afterPath="$PROJECT_DIR$/rnn_output4.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -63,7 +56,7 @@
         </entry>
       </file>
       <file leaf-file-name="rnn_output3.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rnn_output3.txt">
+        <entry file="file://$PROJECT_DIR$/output_files/rnn_output3.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1055">
               <caret line="39152" column="0" lean-forward="false" selection-start-line="39152" selection-start-column="0" selection-end-line="39152" selection-end-column="0" />
@@ -73,7 +66,7 @@
         </entry>
       </file>
       <file leaf-file-name="rnn_output2.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rnn_output2.txt">
+        <entry file="file://$PROJECT_DIR$/output_files/rnn_output2.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-610554">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -207,6 +200,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="output_files" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Stock_Predictions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Stock_Predictions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="got3" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -219,6 +226,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../FTF_Route_Opt/code/main.py" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/output_files" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -475,9 +485,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="824" width="1280" height="729" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15390626" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15390626" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -516,7 +526,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rnn_output.txt">
+    <entry file="file://$PROJECT_DIR$/output_files/rnn_output.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -544,7 +554,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rnn_output.txt">
+    <entry file="file://$PROJECT_DIR$/output_files/rnn_output.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -563,7 +573,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test2.py" />
-    <entry file="file://$PROJECT_DIR$/rnn_output.txt">
+    <entry file="file://$PROJECT_DIR$/output_files/rnn_output.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -582,7 +592,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test2.py" />
-    <entry file="file://$PROJECT_DIR$/rnn_output.txt">
+    <entry file="file://$PROJECT_DIR$/output_files/rnn_output.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120186">
           <caret line="6677" column="0" lean-forward="false" selection-start-line="6677" selection-start-column="0" selection-end-line="6677" selection-end-column="0" />
@@ -623,7 +633,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test2.py" />
-    <entry file="file://$PROJECT_DIR$/rnn_output.txt">
+    <entry file="file://$PROJECT_DIR$/output_files/rnn_output.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-928742">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -631,7 +641,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rnn_output4.txt">
+    <entry file="file://$PROJECT_DIR$/output_files/rnn_output4.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-704077">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -665,7 +675,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rnn_output3.txt">
+    <entry file="file://$PROJECT_DIR$/output_files/rnn_output3.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1055">
           <caret line="39152" column="0" lean-forward="false" selection-start-line="39152" selection-start-column="0" selection-end-line="39152" selection-end-column="0" />
@@ -681,7 +691,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rnn_output2.txt">
+    <entry file="file://$PROJECT_DIR$/output_files/rnn_output2.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-610554">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
