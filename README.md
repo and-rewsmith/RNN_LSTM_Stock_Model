@@ -14,6 +14,6 @@ General Process is as follows:
 
 4. Split into training windows of ```n``` timesteps where each timestep is one day (target is the next days closing price)
 
-5. Train -> Predict -Refine
+5. Train -> Predict -> Refine
 
 ## Performance Examples
