@@ -1,6 +1,6 @@
 # Recurrent Neural Network (LSTM) Stock Model
 
-##Description
+## Description
 
 This model uses stock data and twitter sentiment to generate a prediction of future market trends.
 
@@ -16,4 +16,4 @@ General Process is as follows:
 
 5. Train -> Predict -Refine
 
-##Performance Examples
+## Performance Examples
