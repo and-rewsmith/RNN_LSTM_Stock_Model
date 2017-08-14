@@ -18,4 +18,4 @@ General Process is as follows:
 
 ## Performance Examples
 
-![Alt text](https://github.com/als5ev/stock_rnn_model/blob/master/img/Demo.png?raw=true "Example 1")
+![Alt text](https://github.com/als5ev/stock_rnn_model/blob/master/img/demo.png?raw=true "Example 1")
