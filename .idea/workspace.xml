@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0da2773a-de99-484c-9153-ecb3ca595db1" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/rnn_output.txt" afterPath="$PROJECT_DIR$/output_files/rnn_output.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/rnn_output2.txt" afterPath="$PROJECT_DIR$/output_files/rnn_output2.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/rnn_output3.txt" afterPath="$PROJECT_DIR$/output_files/rnn_output3.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/rnn_output4.txt" afterPath="$PROJECT_DIR$/output_files/rnn_output4.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="0da2773a-de99-484c-9153-ecb3ca595db1" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -200,21 +194,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="output_files" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Stock_Predictions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Stock_Predictions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="got3" />
+              <option name="myItemId" value="img" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -227,6 +207,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/img" />
       <recent name="$PROJECT_DIR$/output_files" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
