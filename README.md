@@ -17,3 +17,5 @@ General Process is as follows:
 5. Train -> Predict -> Refine
 
 ## Performance Examples
+
+![Alt text](https://github.com/als5ev/stock_rnn_model/blob/master/img/Demo.png?raw=true "Example 1")
