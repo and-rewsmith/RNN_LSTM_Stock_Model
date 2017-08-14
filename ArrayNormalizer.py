@@ -1,5 +1,6 @@
 import numpy as np
 
+#Min max scales. As of now I am not using this.
 class ArrayNormalizer:
 
     def __init__(self, arr):

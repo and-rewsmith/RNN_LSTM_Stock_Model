@@ -9,15 +9,10 @@ import datetime
 from operator import itemgetter
 from sklearn.metrics import mean_squared_error
 from math import sqrt
-from keras.models import Sequential
-from keras.layers.core import Dense, Dropout, Activation
-from keras.layers.recurrent import LSTM
-from sklearn.preprocessing import Normalizer
-from keras.layers.advanced_activations import LeakyReLU
 from sklearn.preprocessing import MinMaxScaler
 import copy
-from keras import optimizers
 from ArrayNormalizer import ArrayNormalizer
+from model import build_model
 
 
 
@@ -29,13 +24,18 @@ def get_stock_data(stock_name, normalized=0):
     col_names = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
     stocks = pd.read_csv(url, header=0, names=col_names)
     df = pd.DataFrame(stocks)
+    # TODO: save date info
     df.drop(df.columns[[0, 3, 5]], axis=1, inplace=True)
-    return df
+
+    # TODO: get tweets for each date, sentiment analysis, and store in matrix
+
+    return df     # TODO: return tweet matrix
+
 
 
 
 #Loads in stock data from a dataframe and tra
-def load_data(stock, seq_len, train_percent=.75):
+def load_data(stock, seq_len, train_percent=.75): # TODO: add twitter data to params
     data = stock.as_matrix()
 
     # iterate so that we can also capture a sequence for a target
@@ -48,6 +48,7 @@ def load_data(stock, seq_len, train_percent=.75):
     for index in range(len(data) - sequence_length):
         time_series = data[index: index + sequence_length]
         result.append(time_series)
+        # TODO: split twitter data into timeseries
 
     result = np.array(result)
 
@@ -57,17 +58,19 @@ def load_data(stock, seq_len, train_percent=.75):
         reference_points.append(result[i][0][0])
         result[i] = (((result[i]) / (result[i][0][0])) - 1)
 
+    # TODO: stack stock timeseries and twitter timeseries
+
     # train test split
     row = round(train_percent * result.shape[0])
     train = result[:int(row), :]
     test = result[int(row):, :]
 
     x_train = train[:, :-1]
-    train_target_timeseries = train[:, -1, -1]
+    train_target_timeseries = train[:, -1, -1] # TODO: change indice to target (will end up pointing to twitter data after changes)
     y_train = train_target_timeseries
 
     x_test = test[:, :-1]
-    test_target_timeseries = test[:, -1, -1]
+    test_target_timeseries = test[:, -1, -1] # TODO: change indice to target (will end up pointing to twitter data after changes)
     y_test = test_target_timeseries
 
 
@@ -89,22 +92,6 @@ def load_data(stock, seq_len, train_percent=.75):
     y_test = np.asarray(y_test)
 
     return [x_train, y_train, x_test, y_test, reference_points]
-
-
-def build_model(layers):
-    d = 0.2
-    model = Sequential()
-    model.add(LSTM(128, input_shape=(layers[1], layers[0]), return_sequences=True))
-    model.add(Dropout(d))
-    model.add(LSTM(64, input_shape=(layers[1], layers[0]), return_sequences=False))
-    model.add(Dropout(d))
-    model.add(Dense(16, kernel_initializer="uniform"))
-    model.add(LeakyReLU(alpha=0.3))
-    model.add(Dense(1, kernel_initializer="uniform"))
-    model.add(LeakyReLU(alpha=0.3))
-    #adam = optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
-    model.compile(loss='mse', optimizer="rmsprop", metrics=['accuracy'])
-    return model
 
 
 
@@ -129,7 +116,7 @@ model.fit(
     X_train,
     y_train,
     batch_size=512,
-    epochs=50,
+    epochs=1,
     validation_split=0.1,
     verbose=2)
 
