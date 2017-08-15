@@ -17,3 +17,5 @@ General Process is as follows:
 5. Train -> Predict -> Refine
 
 ## Performance Examples
+
+![Alt text](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo.png?raw=true "Example 1")
