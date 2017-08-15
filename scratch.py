@@ -2,9 +2,10 @@ from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 from ArrayNormalizer import ArrayNormalizer
 
-arr1 = [ [[0,2],[3,4]], [[5,6],[7,8]], [[6,8],[9,10]], [[12,15],[7,3]] ]
-arr1 =np.asarray(arr1)
+arr1 = [ [0, 1, 2], [3, 4, 5], [8, 9, 10] ]
+sents = [-1, -2, -3]
 
+for i in range(0, len(arr1)):
+    arr1[i].append(sents[i])
 
-norm = ArrayNormalizer(arr1)
-print(norm.transform(arr1))
+print(arr1)

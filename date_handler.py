@@ -38,14 +38,21 @@ def date_to_sentiment(dates, ticker, max_tweets):
 
         sents_per_date = []
         for t in tweets:
-            print(t.text)
             blob = TextBlob(t.text)
             sent = blob.sentiment[0] #get the polarity (subjectivity seems less important)
             sents_per_date.append(sent)
 
         sents_per_date = np.asarray(sents_per_date)
 
-        sentiments.append(sents_per_date.mean())
+        #warning insight
+        try:
+            sentiments.append(sents_per_date.mean())
+        except RuntimeWarning:
+            print("RUNTIME WARNING")
+            print(d)
+            print(sents_per_date)
+            for t in tweets:
+                print(t.text)
 
     return sentiments
 

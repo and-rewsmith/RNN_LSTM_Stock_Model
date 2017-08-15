@@ -13,29 +13,33 @@ from sklearn.preprocessing import MinMaxScaler
 import copy
 from ArrayNormalizer import ArrayNormalizer
 from model import build_model
+from date_handler import date_to_sentiment
 
 
 
 #gets stock data from google finance, excludes some columns, then returns a dataframe
 def get_stock_data(stock_name, normalized=0):
     print("GETTING STOCK DATA")
-    url = "http://www.google.com/finance/historical?q=" + stock_name + "&startdate=Jul+12%2C+2003&enddate=Jul+11%2C+2017&num=30&ei=rCtlWZGSFN3KsQHwrqWQCw&output=csv"
+    url = "http://www.google.com/finance/historical?q=" + stock_name + "&startdate=Jul+12%2C+2016&enddate=Jul+11%2C+2017&num=30&ei=rCtlWZGSFN3KsQHwrqWQCw&output=csv"
 
     col_names = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
     stocks = pd.read_csv(url, header=0, names=col_names)
     df = pd.DataFrame(stocks)
     # TODO: save date info
+    dates = df['Date'].tolist()
     df.drop(df.columns[[0, 3, 5]], axis=1, inplace=True)
 
     # TODO: get tweets for each date, sentiment analysis, and store in matrix
+    max_tweets = 100
+    sentiments = date_to_sentiment(dates, stock_name, max_tweets)
 
-    return df     # TODO: return tweet matrix
+    return df, sentiments     # TODO: return tweet matrix
 
 
 
 
 #Loads in stock data from a dataframe and tra
-def load_data(stock, seq_len, train_percent=.75): # TODO: add twitter data to params
+def load_data(stock, seq_len, sentiments, train_percent=.75): # TODO: add twitter data to params
     data = stock.as_matrix()
 
     # iterate so that we can also capture a sequence for a target
@@ -45,12 +49,12 @@ def load_data(stock, seq_len, train_percent=.75): # TODO: add twitter data to pa
 
     # segment the data into timeseries (these will be overlapping)
     result = []
+    sentiment_series = []
     for index in range(len(data) - sequence_length):
         time_series = data[index: index + sequence_length]
         result.append(time_series)
         # TODO: split twitter data into timeseries
-
-    result = np.array(result)
+        sentiment_series.append(sentiments[index: index + sequence_length])
 
     # normalize
     reference_points = [] # for de-normalizing outside of the function
@@ -59,6 +63,12 @@ def load_data(stock, seq_len, train_percent=.75): # TODO: add twitter data to pa
         result[i] = (((result[i]) / (result[i][0][0])) - 1)
 
     # TODO: stack stock timeseries and twitter timeseries
+    for i in range(0, len(result)):
+        for j in range(0, len(result[i])):
+            result[i][j] = result[i][j].tolist().insert(0, sentiment_series[i][j])
+            print(sentiment_series[i][j])
+
+    result = np.asarray(result)
 
     # train test split
     row = round(train_percent * result.shape[0])
@@ -66,11 +76,11 @@ def load_data(stock, seq_len, train_percent=.75): # TODO: add twitter data to pa
     test = result[int(row):, :]
 
     x_train = train[:, :-1]
-    train_target_timeseries = train[:, -1, -1] # TODO: change indice to target (will end up pointing to twitter data after changes)
+    train_target_timeseries = train[:, -1, -1]
     y_train = train_target_timeseries
 
     x_test = test[:, :-1]
-    test_target_timeseries = test[:, -1, -1] # TODO: change indice to target (will end up pointing to twitter data after changes)
+    test_target_timeseries = test[:, -1, -1]
     y_test = test_target_timeseries
 
 
@@ -98,11 +108,11 @@ def load_data(stock, seq_len, train_percent=.75): # TODO: add twitter data to pa
 # MAIN()
 
 stock_name = 'GOOGL'
-df = get_stock_data(stock_name, 0)
+df, sentiments = get_stock_data(stock_name, 0)
 
 
 window = 10
-X_train, y_train, X_test, y_test, ref = load_data(df[::-1], window, train_percent=.9)
+X_train, y_train, X_test, y_test, ref = load_data(df[::-1], window, sentiments, train_percent=.9)
 
 print("X_train", X_train.shape)
 print("y_train", y_train.shape)
