@@ -4,7 +4,7 @@
 
 This model uses stock data and twitter sentiment to generate a prediction of future market trends.
 
-General Process is as follows:
+General process is as follows:
 
 1. Get stock data from Google Finance (day-to-day data)
 
