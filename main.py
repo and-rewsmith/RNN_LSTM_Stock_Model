@@ -20,7 +20,7 @@ from date_handler import date_to_sentiment
 #gets stock data from google finance, excludes some columns, then returns a dataframe
 def get_stock_data(stock_name, normalized=0):
     print("GETTING STOCK DATA")
-    url = "http://www.google.com/finance/historical?q=" + stock_name + "&startdate=Jul+12%2C+2016&enddate=Jul+11%2C+2017&num=30&ei=rCtlWZGSFN3KsQHwrqWQCw&output=csv"
+    url = "http://www.google.com/finance/historical?q=" + stock_name + "&startdate=Jul+10%2C+2017&enddate=Jul+27%2C+2017&num=30&ei=rCtlWZGSFN3KsQHwrqWQCw&output=csv"
 
     col_names = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
     stocks = pd.read_csv(url, header=0, names=col_names)
@@ -30,7 +30,7 @@ def get_stock_data(stock_name, normalized=0):
     df.drop(df.columns[[0, 3, 5]], axis=1, inplace=True)
 
     # TODO: get tweets for each date, sentiment analysis, and store in matrix
-    max_tweets = 100
+    max_tweets = 10
     sentiments = date_to_sentiment(dates, stock_name, max_tweets)
 
     return df, sentiments     # TODO: return tweet matrix
@@ -52,6 +52,7 @@ def load_data(stock, seq_len, sentiments, train_percent=.75): # TODO: add twitte
     sentiment_series = []
     for index in range(len(data) - sequence_length):
         time_series = data[index: index + sequence_length]
+        time_series = time_series
         result.append(time_series)
         # TODO: split twitter data into timeseries
         sentiment_series.append(sentiments[index: index + sequence_length])
@@ -61,12 +62,25 @@ def load_data(stock, seq_len, sentiments, train_percent=.75): # TODO: add twitte
     for i in range(0, len(result)):
         reference_points.append(result[i][0][0])
         result[i] = (((result[i]) / (result[i][0][0])) - 1)
+    print(result)
 
     # TODO: stack stock timeseries and twitter timeseries
+    updated_result = [] #wouldn't let me convert result[i][j] to list
     for i in range(0, len(result)):
+        timestep = []
         for j in range(0, len(result[i])):
-            result[i][j] = result[i][j].tolist().insert(0, sentiment_series[i][j])
-            print(sentiment_series[i][j])
+            print(type(result))
+            print(type(result[i]))
+            print(type(result[i][j]))
+            result[i][j].tolist()
+            result[i][j].insert(0, float(sentiment_series[i][j]))
+            # temp = result[i][j].tolist()
+            # temp.insert(0, float(sentiment_series[i][j]))
+            # print(temp)
+            # timestep.append(temp)
+        updated_result.append(timestep)
+    print("MARKER")
+    print(result)
 
     result = np.asarray(result)
 
@@ -109,7 +123,6 @@ def load_data(stock, seq_len, sentiments, train_percent=.75): # TODO: add twitte
 
 stock_name = 'GOOGL'
 df, sentiments = get_stock_data(stock_name, 0)
-
 
 window = 10
 X_train, y_train, X_test, y_test, ref = load_data(df[::-1], window, sentiments, train_percent=.9)

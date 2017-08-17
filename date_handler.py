@@ -33,11 +33,14 @@ def date_to_sentiment(dates, ticker, max_tweets):
         tweetCriteria = got3.manager.TweetCriteria().setQuerySearch("{}{}".format("#", ticker)).setMaxTweets(max_tweets) \
             .setSince(arrow_date.format("YYYY-MM-DD")) \
             .setUntil(arrow_date.replace(days=1).format("YYYY-MM-DD"))
-
+        print(d)
+        print(arrow_date.format("YYYY-MM-DD"))
+        print(arrow_date.replace(days=1).format("YYYY-MM-DD"))
         tweets = got3.manager.TweetManager.getTweets(tweetCriteria)
 
         sents_per_date = []
         for t in tweets:
+            print(t.text)
             blob = TextBlob(t.text)
             sent = blob.sentiment[0] #get the polarity (subjectivity seems less important)
             sents_per_date.append(sent)
@@ -57,10 +60,13 @@ def date_to_sentiment(dates, ticker, max_tweets):
     return sentiments
 
 
-# #UNIT TEST
-# dates = ['10-Aug-16', '11-Aug-16']
-# ticker = 'GOOGL'
-# max_tweets = 200
-#
-# print(date_to_sentiment(dates, ticker, max_tweets))
+#UNIT TEST
+dates = ['10-Aug-16', '15-Aug-16']
+ticker = 'GOOGL'
+max_tweets = 200
 
+print(date_to_sentiment(dates, ticker, max_tweets))
+
+# tweetCriteria = got3.manager.TweetCriteria().setUsername('barackobama').setMaxTweets(1)
+# tweet = got3.manager.TweetManager.getTweets(tweetCriteria)[0]
+# print(tweet.text)
