@@ -1,9 +1,7 @@
 import math
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
 from multiple__targets.model_mult import build_model
 
 
