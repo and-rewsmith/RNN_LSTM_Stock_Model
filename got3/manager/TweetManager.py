@@ -107,7 +107,8 @@ class TweetManager:
         else:
             urlLang = ''
         url = url % (urllib.parse.quote(urlGetData), urlLang, refreshCursor)
-        # print(url)
+        #comment out to hide url
+        #print(url)
 
         headers = [
             ('Host', "twitter.com"),
@@ -129,6 +130,10 @@ class TweetManager:
         try:
             response = opener.open(url)
             jsonResponse = response.read()
+            #comment out once done debugging
+            print(
+                "Twitter weird response. Try to see on browser: https://twitter.com/search?q=%s&src=typd" % urllib.parse.quote(
+                    urlGetData))
         except:
             # print("Twitter weird response. Try to see on browser: ", url)
             print(

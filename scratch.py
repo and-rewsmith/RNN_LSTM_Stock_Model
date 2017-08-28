@@ -1,19 +1,20 @@
-from sklearn.preprocessing import MinMaxScaler
-import numpy as np
-from ArrayNormalizer import ArrayNormalizer
+true_var = True
 
-arr1 = [ [0, 1, 2], [3, 4, 5], [8, 9, 10] ]
+list2 = []
 
-arr1 = np.asarray(arr1)
+if true_var:
+    list1 = [1, 2, 3, 4]
+    list2.append(list1)
 
-print(type(arr1))
-arr1 = arr1.tolist()
-print(type(arr1))
+print(list2)
 
 
+1, 1, 2, 3, 5, 8
 
-# arr1 = np.asarray(arr1)
-#
-# print(arr1[0].tolist().insert(0, 1))
-#
-# print(arr1[0])
+def fib(num):
+    if num == 0:
+        return 0
+    if num == 1:
+        return 1
+    else:
+        return fib(num-1) + fib(num-2)

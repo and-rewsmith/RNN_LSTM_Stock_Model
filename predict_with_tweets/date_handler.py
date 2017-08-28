@@ -33,7 +33,6 @@ def date_to_sentiment(dates, ticker, max_tweets):
         tweetCriteria = got3.manager.TweetCriteria().setQuerySearch("{}{}".format("#", ticker)).setMaxTweets(max_tweets) \
             .setSince(arrow_date.format("YYYY-MM-DD")) \
             .setUntil(arrow_date.replace(days=1).format("YYYY-MM-DD"))
-        print(d)
         print(arrow_date.format("YYYY-MM-DD"))
         print(arrow_date.replace(days=1).format("YYYY-MM-DD"))
         tweets = got3.manager.TweetManager.getTweets(tweetCriteria)
@@ -47,26 +46,26 @@ def date_to_sentiment(dates, ticker, max_tweets):
 
         sents_per_date = np.asarray(sents_per_date)
 
-        #warning insight
-        try:
-            sentiments.append(sents_per_date.mean())
-        except RuntimeWarning:
-            print("RUNTIME WARNING")
-            print(d)
-            print(sents_per_date)
-            for t in tweets:
-                print(t.text)
+        # #warning insight
+        # try:
+        #     sentiments.append(sents_per_date.mean())
+        # except RuntimeWarning:
+        #     print("RUNTIME WARNING")
+        #     print(d)
+        #     print(sents_per_date)
+        #     for t in tweets:
+        #         print(t.text)
 
     return sentiments
 
 
-#UNIT TEST
-dates = ['10-Aug-16', '15-Aug-16']
-ticker = 'GOOGL'
-max_tweets = 200
-
-print(date_to_sentiment(dates, ticker, max_tweets))
-
-# tweetCriteria = got3.manager.TweetCriteria().setUsername('barackobama').setMaxTweets(1)
-# tweet = got3.manager.TweetManager.getTweets(tweetCriteria)[0]
-# print(tweet.text)
+# #UNIT TEST
+# dates = ['10-Aug-17']#, '15-Aug-16']
+# ticker = 'GOOGL'
+# max_tweets = 200
+#
+# print(date_to_sentiment(dates, ticker, max_tweets))
+#
+# # tweetCriteria = got3.manager.TweetCriteria().setUsername('barackobama').setMaxTweets(1)
+# # tweet = got3.manager.TweetManager.getTweets(tweetCriteria)[0]
+# # print(tweet.text)
