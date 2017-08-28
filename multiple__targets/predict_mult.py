@@ -10,7 +10,7 @@ from multiple__targets.model_mult import build_model
 #gets stock data from google finance, excludes some columns, then returns a dataframe
 def get_stock_data(stock_name):
     print("GETTING STOCK DATA")
-    url = "http://www.google.com/finance/historical?q=" + stock_name + "&startdate=Jul+10%2C+2010&enddate=Jul+27%2C+2017&num=30&ei=rCtlWZGSFN3KsQHwrqWQCw&output=csv"
+    url = "http://www.google.com/finance/historical?q=" + stock_name + "&startdate=Jul+10%2C+2005&enddate=Aug+20%2C+2017&num=30&ei=rCtlWZGSFN3KsQHwrqWQCw&output=csv"
 
     col_names = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
     stocks = pd.read_csv(url, header=0, names=col_names)
@@ -50,11 +50,12 @@ def load_data(stock, seq_len, target_len, train_percent=.75):
     train = result[:int(row), :]
     test = result[int(row):, :]
 
-    x_train = train[:, :target_len]
-    y_train = train[:, target_len:, -1]
+    split_index = len(train[0]) - target_len
+    x_train = train[:, :split_index]
+    y_train = train[:, split_index:, -1]
 
-    x_test = test[:, :target_len]
-    y_test = test[:, target_len:, -1]
+    x_test = test[:, :split_index]
+    y_test = test[:, split_index:, -1]
 
 
     #In case we want to train on percent increase rather than a stock value
@@ -83,8 +84,8 @@ def load_data(stock, seq_len, target_len, train_percent=.75):
 stock_name = 'GOOGL'
 df = get_stock_data(stock_name)
 
-window = 10
-target_len = 10
+window = 100
+target_len = 40
 X_train, y_train, X_test, y_test, ref = load_data(df[::-1], window, target_len=target_len, train_percent=.9)
 
 print("X_train", X_train.shape)
@@ -99,7 +100,7 @@ model.fit(
     X_train,
     y_train,
     batch_size=512,
-    epochs=1,
+    epochs=5,
     validation_split=0.1,
     verbose=2)
 
@@ -135,7 +136,18 @@ for i in range(0, len(p)):
     y_test[i] = (y_test[i] + 1) * ref[round(.9 * len(ref) + i)]
 
 # plot
-plt.plot(p[:, 0], color='red', label='prediction')
-plt.plot(y_test[:, 0], color='blue', label='y_test')
+
+for i in range(0, len(p)):
+    if i % (target_len*2) == 0:
+        plot_index = i # for filling plot indexes
+        plot_indexes = []
+        plot_values = p[i]
+        for j in range(0, target_len):
+            plot_indexes.append(plot_index)
+            plot_index += 1
+        plt.plot(plot_indexes, plot_values)
+
+#plt.plot(p[0], color='red', label='prediction') # for single target
+plt.plot(y_test[:, 0], color='blue', label='y_test') # actual stock price history
 plt.legend(loc='upper left')
 plt.show()
