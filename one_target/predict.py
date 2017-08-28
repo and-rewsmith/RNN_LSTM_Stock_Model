@@ -46,7 +46,9 @@ def load_data(stock, seq_len, train_percent=.75):
     result = np.asarray(result)
 
     # train test split
+    print(result.shape[0])
     row = round(train_percent * result.shape[0])
+    print(row)
     train = result[:int(row), :]
     test = result[int(row):, :]
 
@@ -84,7 +86,8 @@ stock_name = 'GOOGL'
 df = get_stock_data(stock_name)
 
 window = 10
-X_train, y_train, X_test, y_test, ref = load_data(df[::-1], window, train_percent=.9)
+train_percent = .9
+X_train, y_train, X_test, y_test, ref = load_data(df[::-1], window, train_percent=train_percent)
 
 print("X_train", X_train.shape)
 print("y_train", y_train.shape)
@@ -129,9 +132,17 @@ for i in range(0, len(X_test)):
 
 
 # de-normalize
+print(len(ref))
+row = round(train_percent * len(ref))
+print(row)
+print("reference: " + str(ref[row]))
+print("p[0]: " + str(p[0]))
+print("y_test[0]: " + str(y_test[0]))
+print("prediction: " + str((p[0]+1) * ref[row]))
+print("actual: " + str((y_test[0]+1) * ref[row]))
 for i in range(0, len(p)):
-    p[i] = (p[i] + 1) * ref[int(.9 * len(ref) + i)]
-    y_test[i] = (y_test[i] + 1 * ref[round(.9 * len(ref) + i)])
+    p[i] = (p[i] + 1) * ref[row + i]
+    y_test[i] = (y_test[i] + 1) * ref[row + i]
 
 # plot
 plt.plot(p, color='red', label='prediction')
