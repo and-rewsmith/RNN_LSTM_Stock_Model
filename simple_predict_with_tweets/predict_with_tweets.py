@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 from one_target.model import build_model
-from predict_with_tweets.date_handler import date_to_sentiment
+from predict_with_tweets_simple.date_handler import date_to_sentiment
 
 
 #gets stock data from google finance, excludes some columns, then returns a dataframe

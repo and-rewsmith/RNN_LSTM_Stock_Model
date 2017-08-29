@@ -2,7 +2,7 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from multiple__targets.model_mult import build_model
+from multiple__targets.model_mult_tar import build_model
 
 
 #gets stock data from google finance, excludes some columns, then returns a dataframe
