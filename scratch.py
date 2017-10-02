@@ -1,25 +1,21 @@
-# true_var = True
-#
-# list2 = []
-#
-# if true_var:
-#     list1 = [1, 2, 3, 4]
-#     list2.append(list1)
-#
-# print(list2)
-#
-#
-# 1, 1, 2, 3, 5, 8
-#
-# def fib(num):
-#     if num == 0:
-#         return 0
-#     if num == 1:
-#         return 1
-#     else:
-#         return fib(num-1) + fib(num-2)
+import quandl
+import arrow
+import numpy as np
 
+np.set_printoptions(suppress=True)
 
-l1 = [0, 1, 2, 3, 4]
+end_date = arrow.now().format("YYYY-MM-DD")
+start_date = arrow.now()
+start_date = start_date.replace(days=-20).format("YYYY-MM-DD")
 
-print(l1[-3:])
+print(start_date)
+print(end_date)
+
+quandl_api_key = "DqEaArDZQP8SfgHTd_Ko"
+quandl.ApiConfig.api_key = quandl_api_key
+
+data = quandl.get("WIKI/AAPL", start_date=str(start_date), end_date=str(end_date))
+format_data = data[["Open", "High", "Low", "Volume", "Close"]]
+
+print(format_data)
+print(format_data.as_matrix())
