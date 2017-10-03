@@ -1,3 +1,5 @@
+#TODO: ADD LIVE PRICE TRACKER
+
 import math
 import matplotlib.pyplot as plt
 import numpy as np
@@ -9,7 +11,7 @@ import quandl
 np.set_printoptions(suppress=True)
 
 
-#gets stock data from google finance, excludes some columns, then returns a dataframe
+#gets stock data from quandl in the form of a np array
 def get_stock_data(stock_ticker, num_days_back):
     print("GETTING STOCK DATA")
 
@@ -24,14 +26,14 @@ def get_stock_data(stock_ticker, num_days_back):
 
     data = quandl.get(source, start_date=str(start_date), end_date=str(end_date))
     data = data[["Open", "High", "Low", "Volume", "Close"]].as_matrix()
+    print(data[-1])
     return data
 
 
 
 
-#Loads in stock data from a dataframe and tra
+#take data and split into timeseries so that we can train the model
 def load_data(stock_data, seq_len, target_len, train_percent=.75):
-
     # iterate so that we can also capture a sequence for a target
     combined_length = seq_len + target_len
 
@@ -99,11 +101,11 @@ def load_data(stock_data, seq_len, target_len, train_percent=.75):
 # MAIN()
 
 stock_name = 'GOOGL'
-df = get_stock_data(stock_name, 300)
+stock_data = get_stock_data(stock_name, 300)
 
-window = 200
-target_len = 50
-X_train, y_train, X_test, y_test, ref = load_data(df[::-1], window, target_len=target_len, train_percent=.9)
+window = 10
+target_len = 5
+X_train, y_train, X_test, y_test, ref = load_data(stock_data, window, target_len=target_len, train_percent=.9)
 
 print("X_train", X_train.shape)
 print("y_train", y_train.shape)
