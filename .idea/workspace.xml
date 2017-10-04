@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0da2773a-de99-484c-9153-ecb3ca595db1" name="Default" comment="" />
+    <list default="true" id="0da2773a-de99-484c-9153-ecb3ca595db1" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Version_1_base/predict_mult_tar.py" afterPath="$PROJECT_DIR$/Version_1_base/predict_mult_tar.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,10 +17,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="send_email.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="send_email.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/send_email.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
+            <state relative-caret-position="450">
               <caret line="25" column="4" lean-forward="false" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -27,11 +29,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="predict_mult_tar.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="read_stocks.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/read_stocks.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="predict_mult_tar.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Version_1_base/predict_mult_tar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="222">
+              <caret line="203" column="83" lean-forward="false" selection-start-line="203" selection-start-column="83" selection-end-line="203" selection-end-column="83" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -63,6 +75,7 @@
       <find>ref</find>
       <find>date_to_sentiment</find>
       <find>plt</find>
+      <find>googl</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -104,13 +117,14 @@
         <option value="$PROJECT_DIR$/scratch.py" />
         <option value="$PROJECT_DIR$/Version_3_twitter_sentiment/predict_with_tweets.py" />
         <option value="$PROJECT_DIR$/send_email.py" />
+        <option value="$PROJECT_DIR$/read_stocks.py" />
         <option value="$PROJECT_DIR$/Version_1_base/predict_mult_tar.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2560" />
-    <option name="y" value="24" />
+    <option name="x" value="2560" />
+    <option name="y" value="824" />
     <option name="width" value="1280" />
     <option name="height" value="729" />
   </component>
@@ -206,7 +220,7 @@
       <recent name="$PROJECT_DIR$/img" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.predict_mult_tar">
+  <component name="RunManager" selected="Python.read_stocks">
     <configuration default="false" name="scratch" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -220,23 +234,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Stock_Predictions" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scratch.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="predict_mult" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/multiple__targets" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Stock_Predictions" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/multiple__targets/predict_mult_tar.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -288,6 +285,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Stock_Predictions" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Version_2_multiple_stocls/model_mult_dim.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="read_stocks" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Stock_Predictions" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/read_stocks.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -428,18 +442,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.scratch" />
-      <item index="1" class="java.lang.String" itemvalue="Python.predict_mult" />
-      <item index="2" class="java.lang.String" itemvalue="Python.predict_mult_tar" />
-      <item index="3" class="java.lang.String" itemvalue="Python.predict_mult_dim" />
-      <item index="4" class="java.lang.String" itemvalue="Python.model_mult_dim" />
+      <item index="1" class="java.lang.String" itemvalue="Python.predict_mult_tar" />
+      <item index="2" class="java.lang.String" itemvalue="Python.predict_mult_dim" />
+      <item index="3" class="java.lang.String" itemvalue="Python.model_mult_dim" />
+      <item index="4" class="java.lang.String" itemvalue="Python.read_stocks" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.predict_mult_tar" />
-        <item index="1" class="java.lang.String" itemvalue="Python.scratch" />
-        <item index="2" class="java.lang.String" itemvalue="Python.model_mult_dim" />
-        <item index="3" class="java.lang.String" itemvalue="Python.predict_mult_dim" />
-        <item index="4" class="java.lang.String" itemvalue="Python.predict_mult" />
+        <item index="0" class="java.lang.String" itemvalue="Python.read_stocks" />
+        <item index="1" class="java.lang.String" itemvalue="Python.predict_mult_tar" />
+        <item index="2" class="java.lang.String" itemvalue="Python.scratch" />
+        <item index="3" class="java.lang.String" itemvalue="Python.model_mult_dim" />
+        <item index="4" class="java.lang.String" itemvalue="Python.predict_mult_dim" />
       </list>
     </recent_temporary>
   </component>
@@ -457,7 +471,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2560" y="24" width="1280" height="729" extended-state="6" />
+    <frame x="2560" y="824" width="1280" height="729" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22421876" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -496,13 +510,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/misc(DEPRECATED)/ArrayNormalizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="47" lean-forward="false" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/simple/model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -813,22 +820,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/send_email.py">
+    <entry file="file://$PROJECT_DIR$/read_stocks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="25" column="4" lean-forward="false" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="252">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Version_1_base/predict_mult_tar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="222">
+          <caret line="203" column="83" lean-forward="false" selection-start-line="203" selection-start-column="83" selection-end-line="203" selection-end-column="83" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/send_email.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" column="4" lean-forward="false" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

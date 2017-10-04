@@ -6,6 +6,7 @@ from Version_1_base.model_mult_tar import build_model
 import arrow
 import quandl
 from send_email import send_email
+from read_stocks import read_stocks
 
 np.set_printoptions(suppress=True)
 
@@ -200,7 +201,7 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
 
 #MAIN()
 
-tickers = ["GOOGL"]
+tickers = read_stocks("ftp://ftp.nasdaqtrader.com/symboldirectory/nasdaqlisted.txt")
 
 for ticker in tickers:
     generate_graph(ticker, 3700, 100, 30)
