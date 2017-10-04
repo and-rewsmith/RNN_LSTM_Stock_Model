@@ -92,12 +92,13 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
     recent_data = stock_data[-num_timesteps:]
     recent_data = normalize_timestep(recent_data, recent_reference)
 
-    print("X_train", X_train.shape)
-    print("y_train", y_train.shape)
-    print("X_test", X_test.shape)
-    print("y_test", y_test.shape)
+    print("    X_train", X_train.shape)
+    print("    y_train", y_train.shape)
+    print("    X_test", X_test.shape)
+    print("    y_test", y_test.shape)
 
     # setup model
+    print("TRAINING")
     model = build_model([5, num_timesteps, target_len])
     model.fit(
         X_train,
@@ -115,12 +116,14 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
     print('Test Score: %.2f MSE (%.2f RMSE) (%.2f)' % (testScore[0], math.sqrt(testScore[0]), testScore[1]))
 
     #make predictions
+    print("PREDICTING")
     p = model.predict(X_test)
     recent_data = [recent_data] # One-sample predictions need list wrapper. Argument must be 3d.
     recent_data = np.asarray(recent_data)
     future = model.predict([recent_data])
 
     # document results in file
+    print("WRITING TO LOG")
     file = open("log.txt", "w")
     for i in range(0, len(X_train)):
         for s in range(0, num_timesteps):
@@ -136,6 +139,7 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
         file.write("\n")
 
     # de-normalize
+    print("DENORMALIZING")
     for i in range(0, len(p)):
         p[i] = (p[i] + 1) * ref[round(.9 * len(ref) + i)]
         y_test[i] = (y_test[i] + 1) * ref[round(.9 * len(ref) + i)]
@@ -144,6 +148,7 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
     recent_data[0] = (recent_data[0] + 1) * recent_reference[0]
 
     # plot historical predictions
+    print("PLOTTING")
     for i in range(0, len(p)):
         if i % (target_len*2) == 0:
             plot_index = i #for filling plot indexes
@@ -152,7 +157,7 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
             for j in range(0, target_len):
                 plot_indexes.append(plot_index)
                 plot_index += 1
-            plt.plot(plot_indexes, plot_values)
+            plt.plot(plot_indexes, plot_values, color="red")
 
     # plot historical actual
     plt.plot(y_test[:, 0], color='blue', label='Actual') # actual stock price history
@@ -177,7 +182,11 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
     plt.plot(plot_indexes, plot_values, color="red", label="Prediction")
 
     #show/save plot
-    plt.legend(loc='upper left')
+    print("SENDING EMAILS")
+    plt.legend(loc="upper left")
+    plt.title(stock_name + " Price Predictions")
+    plt.xlabel("Days")
+    plt.ylabel("Price ($)")
     filename = stock_name + "_" + str(arrow.utcnow().format("YYYY-MM-DD") + "_" + str(days_back))
     plt.savefig("graphs/" + filename)
     #plt.show()
@@ -187,10 +196,12 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
 
 
 
+
+
 #MAIN()
 
-tickers = ["GOOGL", "AAPL"]
+tickers = ["GOOGL"]
 
 for ticker in tickers:
-    generate_graph(ticker, 1500, 100, 30)
+    generate_graph(ticker, 3700, 100, 30)
     #generate_graph(ticker, 300, 20, 10) #FOR TESTING
