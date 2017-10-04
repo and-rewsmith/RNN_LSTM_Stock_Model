@@ -121,7 +121,7 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
     future = model.predict([recent_data])
 
     # document results in file
-    file = open("rnn_output4.txt", "w")
+    file = open("log.txt", "w")
     for i in range(0, len(X_train)):
         for s in range(0, num_timesteps):
             file.write(str(X_train[i][s]) + "\n")

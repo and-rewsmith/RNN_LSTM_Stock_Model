@@ -142,7 +142,7 @@ p = model.predict(X_test)
 
 
 # document results in file
-file = open("rnn_output4.txt", "w")
+file = open("log.txt", "w")
 for i in range(0, len(X_train)):
     for s in range(0, window):
         file.write(str(X_train[i][s]) + "\n")
