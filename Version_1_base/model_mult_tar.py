@@ -1,7 +1,6 @@
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
 from keras.layers.recurrent import LSTM
-from sklearn.preprocessing import Normalizer
 from keras.layers.advanced_activations import LeakyReLU
 from keras import optimizers
 
