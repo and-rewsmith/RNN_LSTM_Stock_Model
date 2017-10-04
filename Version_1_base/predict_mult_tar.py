@@ -77,18 +77,6 @@ def load_data(stock_data, num_timesteps, target_len, train_percent=.75):
     x_test = test[:, :split_index]
     y_test = test[:, split_index:, -1]
 
-
-    #In case we want to train on percent increase rather than a stock value
-    # for i in range(0, len(train_target_timeseries)):
-    #     start_price = x_train[i][-1][2]
-    #     percent_increase = ((train_target_timeseries[i] - start_price) / start_price) * 100
-    #     y_train.append(percent_increase)
-    #
-    # for i in range(0, len(test_target_timeseries)):
-    #     start_price = x_test[i][-1][2]
-    #     percent_increase = ((test_target_timeseries[i] - start_price) / start_price) * 100
-    #     y_test.append(percent_increase)
-
     return [x_train, y_train, x_test, y_test, reference_points]
 
 
@@ -191,7 +179,7 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
     #show/save plot
     plt.legend(loc='upper left')
     filename = stock_name + "_" + str(arrow.utcnow().format("YYYY-MM-DD") + "_" + str(days_back))
-    plt.savefig(filename)
+    plt.savefig("graphs/" + filename)
     #plt.show()
     plt.close()
     send_email(filename)
@@ -204,5 +192,5 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
 tickers = ["GOOGL", "AAPL"]
 
 for ticker in tickers:
-    #generate_graph(ticker, 1500, 100, 30)
-    generate_graph(ticker, 300, 20, 10)
+    generate_graph(ticker, 1500, 100, 30)
+    #generate_graph(ticker, 300, 20, 10) #FOR TESTING
