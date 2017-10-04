@@ -5,6 +5,7 @@ import pandas as pd
 from Version_1_base.model_mult_tar import build_model
 import arrow
 import quandl
+from send_email import send_email
 
 np.set_printoptions(suppress=True)
 
@@ -92,104 +93,116 @@ def load_data(stock_data, num_timesteps, target_len, train_percent=.75):
 
 
 
-# MAIN()
+def generate_graph(stock_name, days_back, num_timesteps, target_len):
+    stock_name = stock_name
+    stock_data = get_stock_data(stock_name, days_back)
 
-stock_name = 'GOOGL'
-stock_data = get_stock_data(stock_name, 750)
+    X_train, y_train, X_test, y_test, ref = load_data(stock_data, num_timesteps, target_len=target_len, train_percent=.9)
 
-num_timesteps = 20
-target_len = 10
-X_train, y_train, X_test, y_test, ref = load_data(stock_data, num_timesteps, target_len=target_len, train_percent=.9)
+    # store recent data so that we can get a live prediction
+    recent_reference = []
+    recent_data = stock_data[-num_timesteps:]
+    recent_data = normalize_timestep(recent_data, recent_reference)
 
-# store recent data so that we can get a live prediction
-recent_reference = []
-recent_data = stock_data[-num_timesteps:]
-recent_data = normalize_timestep(recent_data, recent_reference)
+    print("X_train", X_train.shape)
+    print("y_train", y_train.shape)
+    print("X_test", X_test.shape)
+    print("y_test", y_test.shape)
 
-print("X_train", X_train.shape)
-print("y_train", y_train.shape)
-print("X_test", X_test.shape)
-print("y_test", y_test.shape)
+    # setup model
+    model = build_model([5, num_timesteps, target_len])
+    model.fit(
+        X_train,
+        y_train,
+        batch_size=512,
+        epochs=1,
+        validation_split=0.1,
+        verbose=2)
 
-# setup model
-model = build_model([5, num_timesteps, target_len])
-model.fit(
-    X_train,
-    y_train,
-    batch_size=512,
-    epochs=1,
-    validation_split=0.1,
-    verbose=2)
+    #train the model
+    trainScore = model.evaluate(X_train, y_train, verbose=100)
+    print('Train Score: %.2f MSE (%.2f RMSE) (%.2f)' % (trainScore[0], math.sqrt(trainScore[0]), trainScore[1]))
 
-#train the model
-trainScore = model.evaluate(X_train, y_train, verbose=100)
-print('Train Score: %.2f MSE (%.2f RMSE) (%.2f)' % (trainScore[0], math.sqrt(trainScore[0]), trainScore[1]))
+    testScore = model.evaluate(X_test, y_test, verbose=100)
+    print('Test Score: %.2f MSE (%.2f RMSE) (%.2f)' % (testScore[0], math.sqrt(testScore[0]), testScore[1]))
 
-testScore = model.evaluate(X_test, y_test, verbose=100)
-print('Test Score: %.2f MSE (%.2f RMSE) (%.2f)' % (testScore[0], math.sqrt(testScore[0]), testScore[1]))
+    #make predictions
+    p = model.predict(X_test)
+    recent_data = [recent_data] # One-sample predictions need list wrapper. Argument must be 3d.
+    recent_data = np.asarray(recent_data)
+    future = model.predict([recent_data])
 
-#make predictions
-p = model.predict(X_test)
-recent_data = [recent_data] # One-sample predictions need list wrapper. Argument must be 3d.
-recent_data = np.asarray(recent_data)
-future = model.predict([recent_data])
+    # document results in file
+    file = open("rnn_output4.txt", "w")
+    for i in range(0, len(X_train)):
+        for s in range(0, num_timesteps):
+            file.write(str(X_train[i][s]) + "\n")
+        file.write("Target: " + str(y_train[i]) + "\n")
+        file.write("\n")
 
-# document results in file
-file = open("rnn_output4.txt", "w")
-for i in range(0, len(X_train)):
-    for s in range(0, num_timesteps):
-        file.write(str(X_train[i][s]) + "\n")
-    file.write("Target: " + str(y_train[i]) + "\n")
-    file.write("\n")
+    for i in range(0, len(X_test)):
+        for s in range(0, num_timesteps):
+            file.write(str(X_test[i][s]) + "\n")
+        file.write("Target: " + str(y_test[i]) + "\n")
+        file.write("Prediction: " + str(p[i]) + "\n")
+        file.write("\n")
 
-for i in range(0, len(X_test)):
-    for s in range(0, num_timesteps):
-        file.write(str(X_test[i][s]) + "\n")
-    file.write("Target: " + str(y_test[i]) + "\n")
-    file.write("Prediction: " + str(p[i]) + "\n")
-    file.write("\n")
+    # de-normalize
+    for i in range(0, len(p)):
+        p[i] = (p[i] + 1) * ref[round(.9 * len(ref) + i)]
+        y_test[i] = (y_test[i] + 1) * ref[round(.9 * len(ref) + i)]
 
-# de-normalize
-for i in range(0, len(p)):
-    p[i] = (p[i] + 1) * ref[round(.9 * len(ref) + i)]
-    y_test[i] = (y_test[i] + 1) * ref[round(.9 * len(ref) + i)]
+    future[0] = (future[0] + 1) * recent_reference[0]
+    recent_data[0] = (recent_data[0] + 1) * recent_reference[0]
 
-future[0] = (future[0] + 1) * recent_reference[0]
-recent_data[0] = (recent_data[0] + 1) * recent_reference[0]
+    # plot historical predictions
+    for i in range(0, len(p)):
+        if i % (target_len*2) == 0:
+            plot_index = i #for filling plot indexes
+            plot_indexes = []
+            plot_values = p[i]
+            for j in range(0, target_len):
+                plot_indexes.append(plot_index)
+                plot_index += 1
+            plt.plot(plot_indexes, plot_values)
 
-# plot historical predictions
-for i in range(0, len(p)):
-    if i % (target_len*2) == 0:
-        plot_index = i #for filling plot indexes
-        plot_indexes = []
-        plot_values = p[i]
-        for j in range(0, target_len):
-            plot_indexes.append(plot_index)
-            plot_index += 1
-        plt.plot(plot_indexes, plot_values)
+    # plot historical actual
+    plt.plot(y_test[:, 0], color='blue', label='Actual') # actual stock price history
 
-# plot historical actual
-plt.plot(y_test[:, 0], color='blue', label='Actual') # actual stock price history
+    # plot recent prices
+    plot_indexes = [len(y_test) - 1]
+    plot_values = [y_test[-1, 0]]
+    plot_index = None
+    for i in range(0, len(recent_data[0])):
+        plot_values.append(recent_data[0][i][0])
+        plot_index = len(y_test) + i
+        plot_indexes.append(len(y_test)+i)
+    plt.plot(plot_indexes, plot_values, color='blue')
 
-# plot recent prices
-plot_indexes = [len(y_test) - 1]
-plot_values = [y_test[-1, 0]]
-plot_index = None
-for i in range(0, len(recent_data[0])):
-    plot_values.append(recent_data[0][i][0])
-    plot_index = len(y_test) + i
-    plot_indexes.append(len(y_test)+i)
-plt.plot(plot_indexes, plot_values, color='blue')
+    # plot future predictions
+    plot_indexes = [plot_index]
+    plot_values = [recent_data[0][-1][0]]
+    for i in range(0, len(future[0])):
+        plot_index += 1
+        plot_values.append(future[0][i])
+        plot_indexes.append(plot_index)
+    plt.plot(plot_indexes, plot_values, color="red", label="Prediction")
 
-# plot future predictions
-plot_indexes = [plot_index]
-plot_values = [recent_data[0][-1][0]]
-for i in range(0, len(future[0])):
-    plot_index += 1
-    plot_values.append(future[0][i])
-    plot_indexes.append(plot_index)
-plt.plot(plot_indexes, plot_values, color="red", label="Prediction")
+    #show/save plot
+    plt.legend(loc='upper left')
+    filename = stock_name + "_" + str(arrow.utcnow().format("YYYY-MM-DD") + "_" + str(days_back))
+    plt.savefig(filename)
+    #plt.show()
+    plt.close()
+    send_email(filename)
 
-#show plot
-plt.legend(loc='upper left')
-plt.show()
+
+
+
+#MAIN()
+
+tickers = ["GOOGL", "AAPL"]
+
+for ticker in tickers:
+    #generate_graph(ticker, 1500, 100, 30)
+    generate_graph(ticker, 300, 20, 10)
