@@ -194,6 +194,8 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
     plt.close()
     send_email(filename)
 
+    return True
+
 
 
 
@@ -206,10 +208,11 @@ num_days_back = 3700
 
 for ticker in tickers:
     actual_days_back = num_days_back
-    while actual_days_back > 200:
+    isDone = False
+    while actual_days_back > 200 and isDone == False:
         try:
-            generate_graph(ticker, 3700, 100, 30)
+            isDone = generate_graph(ticker, actual_days_back, 100, 30)
+            #isDone = generate_graph(ticker, actual_days_back, 20, 10) #FOR TESTING
         except quandl.errors.quandl_error.NotFoundError:
             actual_days_back -= 100
             print("    Invalid quandl query. Shrinking timeseries.")
-    #generate_graph(ticker, 300, 20, 10) #FOR TESTING
