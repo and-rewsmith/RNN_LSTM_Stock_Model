@@ -202,7 +202,14 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
 #MAIN()
 
 tickers = read_stocks("ftp://ftp.nasdaqtrader.com/symboldirectory/nasdaqlisted.txt")
+num_days_back = 3700
 
 for ticker in tickers:
-    generate_graph(ticker, 3700, 100, 30)
+    actual_days_back = num_days_back
+    while actual_days_back > 200:
+        try:
+            generate_graph(ticker, 3700, 100, 30)
+        except quandl.errors.quandl_error.NotFoundError:
+            actual_days_back -= 100
+            print("    Invalid quandl query. Shrinking timeseries.")
     #generate_graph(ticker, 300, 20, 10) #FOR TESTING
