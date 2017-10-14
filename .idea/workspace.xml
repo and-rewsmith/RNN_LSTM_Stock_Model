@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0da2773a-de99-484c-9153-ecb3ca595db1" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/demo1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/demo2.png" afterPath="" />
-    </list>
+    <list default="true" id="0da2773a-de99-484c-9153-ecb3ca595db1" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -193,7 +190,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="1280" />
-    <option name="y" value="24" />
+    <option name="y" value="824" />
     <option name="width" value="1280" />
     <option name="height" value="729" />
   </component>
@@ -237,8 +234,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/misc(DEPRECATED)" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/misc(DEPRECATED)" />
       <recent name="$PROJECT_DIR$/one_target" />
       <recent name="$PROJECT_DIR$/output_files" />
       <recent name="$PROJECT_DIR$/misc" />
@@ -498,7 +495,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1280" y="24" width="1280" height="729" extended-state="6" />
+    <frame x="1280" y="824" width="1280" height="729" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22421876" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
