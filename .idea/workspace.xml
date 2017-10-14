@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0da2773a-de99-484c-9153-ecb3ca595db1" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_files/rnn_output.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_files/rnn_output2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_files/rnn_output3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_files/rnn_output4.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/demo1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/demo2.png" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -195,7 +192,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="-776" />
+    <option name="x" value="1280" />
+    <option name="y" value="24" />
     <option name="width" value="1280" />
     <option name="height" value="729" />
   </component>
@@ -500,7 +498,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-776" width="1280" height="729" extended-state="6" />
+    <frame x="1280" y="24" width="1280" height="729" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22421876" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -539,13 +537,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/output_files/rnn_output.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scratch.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -817,6 +808,11 @@
           <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/demo1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Version2__twitter_sentiment/predict_with_tweets.py">
