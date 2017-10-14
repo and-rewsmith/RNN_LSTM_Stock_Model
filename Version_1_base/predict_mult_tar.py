@@ -1,8 +1,10 @@
 import math
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from Version_1_base.model_mult_tar import build_model
+from model_mult_tar import build_model
 import arrow
 import quandl
 from send_email import send_email
@@ -27,6 +29,10 @@ def get_stock_data(stock_ticker, num_days_back):
 
     data = quandl.get(source, start_date=str(start_date), end_date=str(end_date))
     data = data[["Open", "High", "Low", "Volume", "Close"]].as_matrix()
+    
+    if len(data) < 700:
+        raise quandl.errors.quandl_error.NotFoundError
+
     return data
 
 
@@ -46,7 +52,6 @@ def normalize_timestep(timestep, reference_list):
 
 #take data and split into timeseries so that we can train the model
 def load_data(stock_data, num_timesteps, target_len, train_percent=.75):
-
     # iterate so that we can also capture a sequence for a target
     combined_length = num_timesteps + target_len
 
@@ -67,7 +72,7 @@ def load_data(stock_data, num_timesteps, target_len, train_percent=.75):
 
 
     # train test split
-    row = round(train_percent * result.shape[0])
+    row = round(train_percent * result.shape[0]) 
     train = result[:int(row), :]
     test = result[int(row):, :]
 
@@ -85,7 +90,6 @@ def load_data(stock_data, num_timesteps, target_len, train_percent=.75):
 def generate_graph(stock_name, days_back, num_timesteps, target_len):
     stock_name = stock_name
     stock_data = get_stock_data(stock_name, days_back)
-
     X_train, y_train, X_test, y_test, ref = load_data(stock_data, num_timesteps, target_len=target_len, train_percent=.9)
 
     # store recent data so that we can get a live prediction
@@ -105,7 +109,7 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
         X_train,
         y_train,
         batch_size=512,
-        epochs=1,
+        epochs=380,
         validation_split=0.1,
         verbose=2)
 
@@ -193,7 +197,7 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
     #plt.show()
     plt.close()
     send_email(filename)
-
+    return True
 
 
 
@@ -202,7 +206,15 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
 #MAIN()
 
 tickers = read_stocks("ftp://ftp.nasdaqtrader.com/symboldirectory/nasdaqlisted.txt")
+num_days_back = 3700
+
 
 for ticker in tickers:
-    generate_graph(ticker, 3700, 100, 30)
+    print("Ticker:" + str(ticker))
+
+    try:
+        isDone = generate_graph(ticker, num_days_back, 100, 30)
+    except quandl.errors.quandl_error.NotFoundError:
+        continue
+    
     #generate_graph(ticker, 300, 20, 10) #FOR TESTING
