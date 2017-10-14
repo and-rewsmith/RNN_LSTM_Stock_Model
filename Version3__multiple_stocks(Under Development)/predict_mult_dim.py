@@ -4,7 +4,6 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-#from Version3__multiple_stocls(Under Development).model_mult_dim import build_model
 import arrow
 import quandl
 np.set_printoptions(suppress=True)
