@@ -4,11 +4,11 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-#from Version_2_multiple_stocls.model_mult_dim import build_model
+#from Version3__multiple_stocls(Under Development).model_mult_dim import build_model
 import arrow
 import quandl
-
 np.set_printoptions(suppress=True)
+
 
 
 #gets stock data from quandl in the form of a np array
@@ -89,6 +89,10 @@ def load_data(stock_data, seq_len, target_len, train_percent=.75):
     y_test = test[:, split_index:, -1]
 
     return [x_train, y_train, x_test, y_test, reference_points]
+
+
+
+
 
 
 # MAIN()

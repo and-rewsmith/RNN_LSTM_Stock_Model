@@ -10,8 +10,3 @@ def read_stocks(url):
         tickers.append(line)
     tickers = tickers[1:-1]
     return tickers
-
-
-
-
-

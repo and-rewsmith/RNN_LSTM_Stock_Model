@@ -1,25 +1,24 @@
-import os
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.image import MIMEImage
-from email.mime.multipart import MIMEMultipart
-
-img_data = open("Version_1_base/GOOGL_2017-10-04.png", 'rb').read()
-msg = MIMEMultipart()
-msg['Subject'] = 'subject'
-msg['From'] = 'e@mail.cc'
-msg['To'] = 'e@mail.cc'
-
-text = MIMEText("test")
-msg.attach(text)
-image = MIMEImage(img_data, name=os.path.basename("Version_1_base/GOOGL_2017-10-04.png"))
-msg.attach(image)
+import arrow
+import quandl
 
 
-s = smtplib.SMTP("smtp.gmail.com", 587)
-s.ehlo()
-s.starttls()
-s.ehlo()
-s.login('laxmaxer@gmail.com', 'MaceWindu1')
-s.sendmail('Graph Generator', 'als5ev@virginia.edu', msg.as_string())
-s.quit()
+num_days_back = 100
+stock_ticker = "AAL"
+
+
+print("GETTING STOCK DATA")
+
+end_date = arrow.now().format("YYYY-MM-DD")
+start_date = arrow.now()
+start_date = start_date.replace(days=(num_days_back * -1)).format("YYYY-MM-DD")
+
+quandl_api_key = "DqEaArDZQP8SfgHTd_Ko"
+quandl.ApiConfig.api_key = quandl_api_key
+
+source = "WIKI/" + stock_ticker
+
+data = quandl.get(source, start_date=str(start_date), end_date=str(end_date))
+
+print(len(data))
+
+data = data[["Open", "High", "Low", "Volume", "Close"]].as_matrix()

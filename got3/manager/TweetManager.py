@@ -131,9 +131,9 @@ class TweetManager:
             response = opener.open(url)
             jsonResponse = response.read()
             #comment out once done debugging
-            print(
-                "Twitter weird response. Try to see on browser: https://twitter.com/search?q=%s&src=typd" % urllib.parse.quote(
-                    urlGetData))
+            # print(
+            #     "Twitter weird response. Try to see on browser: https://twitter.com/search?q=%s&src=typd" % urllib.parse.quote(
+            #         urlGetData))
         except:
             # print("Twitter weird response. Try to see on browser: ", url)
             print(

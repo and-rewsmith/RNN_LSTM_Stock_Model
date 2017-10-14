@@ -2,18 +2,17 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from Version_1_base.model_mult_tar import build_model
+from Version1__base.model_mult_tar import build_model
 import arrow
 import quandl
 from send_email import send_email
-from read_stocks import read_stocks
-
+from read_tickers import read_stocks
 np.set_printoptions(suppress=True)
 
 
 
 #gets stock data from quandl in the form of a np array
-def get_stock_data(stock_ticker, num_days_back):
+def get_stock_data(stock_ticker, num_days_back, minimum_days):
     print("GETTING STOCK DATA")
 
     end_date = arrow.now().format("YYYY-MM-DD")
@@ -25,8 +24,13 @@ def get_stock_data(stock_ticker, num_days_back):
 
     source = "WIKI/" + stock_ticker
 
+    print("    Retrieving data from quandl API...")
     data = quandl.get(source, start_date=str(start_date), end_date=str(end_date))
     data = data[["Open", "High", "Low", "Volume", "Close"]].as_matrix()
+
+    if len(data) < minimum_days:
+        raise quandl.errors.quandl_error.NotFoundError
+
     return data
 
 
@@ -82,9 +86,9 @@ def load_data(stock_data, num_timesteps, target_len, train_percent=.75):
 
 
 
-def generate_graph(stock_name, days_back, num_timesteps, target_len):
+def generate_graph(stock_name, days_back, num_timesteps, target_len, minimum_days=500):
     stock_name = stock_name
-    stock_data = get_stock_data(stock_name, days_back)
+    stock_data = get_stock_data(stock_name, days_back, minimum_days)
 
     X_train, y_train, X_test, y_test, ref = load_data(stock_data, num_timesteps, target_len=target_len, train_percent=.9)
 
@@ -198,21 +202,17 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len):
 
 
 
-
-
-
-#MAIN()
+# MAIN()
 
 tickers = read_stocks("ftp://ftp.nasdaqtrader.com/symboldirectory/nasdaqlisted.txt")
 num_days_back = 3700
 
 for ticker in tickers:
-    actual_days_back = num_days_back
-    isDone = False
-    while actual_days_back > 200 and isDone == False:
-        try:
-            isDone = generate_graph(ticker, actual_days_back, 100, 30)
-            #isDone = generate_graph(ticker, actual_days_back, 20, 10) #FOR TESTING
-        except quandl.errors.quandl_error.NotFoundError:
-            actual_days_back -= 100
-            print("    Invalid quandl query. Shrinking timeseries.")
+    print("Ticker:" + str(ticker))
+
+    try:
+        isDone = generate_graph(ticker, num_days_back, 100, 30)
+    except quandl.errors.quandl_error.NotFoundError:
+        continue
+
+    # generate_graph(ticker, 300, 20, 10) #FOR TESTING
