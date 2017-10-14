@@ -1,169 +1,238 @@
 import math
+
+import arrow
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-from Version_3_twitter_sentiment import build_model
-from Version_3_twitter_sentiment.date_handler import date_to_sentiment
+import quandl
+
+from Version2__twitter_sentiment.date_handler import dates_to_sentiment
+from model import build_model
+from read_tickers import read_stocks
+from send_email import send_email
+
+np.set_printoptions(suppress=True)
 
 
-#gets stock data from google finance, excludes some columns, then returns a dataframe
-def get_stock_data(stock_name, normalized=0):
+
+#gets stock data from quandl in the form of a np array
+def get_stock_data(stock_ticker, num_days_back, minimum_days, max_tweets):
     print("GETTING STOCK DATA")
-    url = "http://www.google.com/finance/historical?q=" + stock_name + "&startdate=Jul+10%2C+2017&enddate=Jul+27%2C+2017&num=30&ei=rCtlWZGSFN3KsQHwrqWQCw&output=csv"
 
-    col_names = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
-    stocks = pd.read_csv(url, header=0, names=col_names)
-    df = pd.DataFrame(stocks)
-    # TODO: save date info
-    dates = df['Date'].tolist()
-    df.drop(df.columns[[0, 3, 5]], axis=1, inplace=True)
+    end_date = arrow.now().format("YYYY-MM-DD")
+    start_date = arrow.now()
+    start_date = start_date.replace(days=(num_days_back*-1)).format("YYYY-MM-DD")
 
-    # TODO: get tweets for each date, sentiment analysis, and store in matrix
-    max_tweets = 10
-    sentiments = date_to_sentiment(dates, stock_name, max_tweets)
+    quandl_api_key = "DqEaArDZQP8SfgHTd_Ko"
+    quandl.ApiConfig.api_key = quandl_api_key
 
-    return df, sentiments     # TODO: return tweet matrix
+    source = "WIKI/" + stock_ticker
+
+    print("    Retrieving data from quandl API...")
+    data = quandl.get(source, start_date=str(start_date), end_date=str(end_date))
+
+    #Quandl will not error if it cannot get the amount of tweets specified. It will get however many exist.
+    if len(data) < minimum_days:
+        raise quandl.errors.quandl_error.NotFoundError
+
+    print("    Retrieving twitter data and performing sentiment analysis...")
+    #get sentiment from the dates
+    dates = list(data.index)
+    for i in range(0, len(dates)):
+        dates[i] = str(dates[i]).split(" ")[0]
+    sentiments = dates_to_sentiment(dates, ticker, max_tweets)
+
+    data = data[["Open", "High", "Low", "Volume", "Close"]].as_matrix()
+    data = np.insert(data, 4, sentiments, axis=1)
+
+    return data
 
 
 
+def normalize_timestep(timestep, reference_list):
+    reference_price = timestep[0][0]
+    reference_list.append(reference_price)
 
-#Loads in stock data from a dataframe and tra
-def load_data(stock, seq_len, sentiments, train_percent=.75): # TODO: add twitter data to params
-    data = stock.as_matrix()
+    temp_volume = np.copy(timestep[:, 3])
+    reference_volume = np.copy(timestep[0, 3])
+
+    temp_sentiment = np.copy(timestep[:, 4])
+
+    timestep = (timestep / reference_price) - 1
+    timestep[:, 3] = (temp_volume / reference_volume) - 1
+    timestep[:, 4] = temp_sentiment
+    return timestep
+
+
+
+#take data and split into timeseries so that we can train the model
+def load_data(stock_data, num_timesteps, target_len, train_percent=.75):
 
     # iterate so that we can also capture a sequence for a target
-    sequence_length = seq_len + 1
+    combined_length = num_timesteps + target_len
 
     print("SPLITTING INTO TIMESERIES")
 
     # segment the data into timeseries (these will be overlapping)
     result = []
-    sentiment_series = []
-    for index in range(len(data) - sequence_length):
-        time_series = data[index: index + sequence_length]
+    for index in range(len(stock_data) - combined_length):
+        time_series = stock_data[index: index + combined_length]
         result.append(time_series[:])
-        # TODO: split twitter data into timeseries
-        sentiment_series.append(sentiments[index: index + sequence_length])
-
-    # normalize
-    reference_points = [] # for de-normalizing outside of the function
-    for i in range(0, len(result)):
-        reference_points.append(result[i][0][0])
-        result[i] = (result[i] / result[i][0][0]) - 1
-    print(result)
-
-    # TODO: stack stock timeseries and twitter timeseries
-    updated_result = [] #wouldn't let me convert result[i][j] to list
-    for i in range(0, len(result)):
-        timestep = []
-        for j in range(0, len(result[i])):
-            print(type(result))
-            print(type(result[i]))
-            print(type(result[i][j]))
-            result[i][j].tolist()
-            result[i][j].insert(0, float(sentiment_series[i][j]))
-            # temp = result[i][j].tolist()
-            # temp.insert(0, float(sentiment_series[i][j]))
-            # print(temp)
-            # timestep.append(temp)
-        updated_result.append(timestep)
-    print("MARKER")
-    print(result)
 
     result = np.asarray(result)
+
+    # normalize
+    reference_points = [] #for de-normalizing outside of the function
+    for i in range(0, len(result)):
+        result[i] = normalize_timestep(result[i], reference_points)
+
 
     # train test split
     row = round(train_percent * result.shape[0])
     train = result[:int(row), :]
     test = result[int(row):, :]
 
-    x_train = train[:, :-1]
-    train_target_timeseries = train[:, -1, -1]
-    y_train = train_target_timeseries
+    split_index = len(train[0]) - target_len
+    x_train = train[:, :split_index]
+    y_train = train[:, split_index:, -1]
 
-    x_test = test[:, :-1]
-    test_target_timeseries = test[:, -1, -1]
-    y_test = test_target_timeseries
-
-
-    #In case we want to train on percent increase rather than a stock value
-    # for i in range(0, len(train_target_timeseries)):
-    #     start_price = x_train[i][-1][2]
-    #     percent_increase = ((train_target_timeseries[i] - start_price) / start_price) * 100
-    #     y_train.append(percent_increase)
-    #
-    # for i in range(0, len(test_target_timeseries)):
-    #     start_price = x_test[i][-1][2]
-    #     percent_increase = ((test_target_timeseries[i] - start_price) / start_price) * 100
-    #     y_test.append(percent_increase)
-
-
-    x_train = np.asarray(x_train)
-    x_test = np.asarray(x_test)
-    y_train = np.asarray(y_train)
-    y_test = np.asarray(y_test)
+    x_test = test[:, :split_index]
+    y_test = test[:, split_index:, -1]
 
     return [x_train, y_train, x_test, y_test, reference_points]
 
 
 
+def generate_graph(stock_name, days_back, num_timesteps, target_len, minimum_days=500, max_tweets=200):
+    #get stock data and twitter sentiment
+    stock_name = stock_name
+    stock_data = get_stock_data(stock_name, days_back, minimum_days, max_tweets)
+
+    X_train, y_train, X_test, y_test, ref = load_data(stock_data, num_timesteps, target_len=target_len, train_percent=.9)
+
+    # store recent data so that we can get a live prediction
+    recent_reference = []
+    recent_data = stock_data[-num_timesteps:]
+    recent_data = normalize_timestep(recent_data, recent_reference)
+
+    print("    X_train", X_train.shape)
+    print("    y_train", y_train.shape)
+    print("    X_test", X_test.shape)
+    print("    y_test", y_test.shape)
+
+    # setup model
+    print("TRAINING")
+    model = build_model([6, num_timesteps, target_len])
+    model.fit(
+        X_train,
+        y_train,
+        batch_size=512,
+        epochs=1,
+        validation_split=0.1,
+        verbose=2)
+
+    #train the model
+    trainScore = model.evaluate(X_train, y_train, verbose=100)
+    print('Train Score: %.2f MSE (%.2f RMSE) (%.2f)' % (trainScore[0], math.sqrt(trainScore[0]), trainScore[1]))
+
+    testScore = model.evaluate(X_test, y_test, verbose=100)
+    print('Test Score: %.2f MSE (%.2f RMSE) (%.2f)' % (testScore[0], math.sqrt(testScore[0]), testScore[1]))
+
+    #make predictions
+    print("PREDICTING")
+    p = model.predict(X_test)
+    recent_data = [recent_data] # One-sample predictions need list wrapper. Argument must be 3d.
+    recent_data = np.asarray(recent_data)
+    future = model.predict([recent_data])
+
+    # document results in file
+    print("WRITING TO LOG")
+    file = open("log.txt", "w")
+    for i in range(0, len(X_train)):
+        for s in range(0, num_timesteps):
+            file.write(str(X_train[i][s]) + "\n")
+        file.write("Target: " + str(y_train[i]) + "\n")
+        file.write("\n")
+
+    for i in range(0, len(X_test)):
+        for s in range(0, num_timesteps):
+            file.write(str(X_test[i][s]) + "\n")
+        file.write("Target: " + str(y_test[i]) + "\n")
+        file.write("Prediction: " + str(p[i]) + "\n")
+        file.write("\n")
+
+    # de-normalize
+    print("DENORMALIZING")
+    for i in range(0, len(p)):
+        p[i] = (p[i] + 1) * ref[round(.9 * len(ref) + i)]
+        y_test[i] = (y_test[i] + 1) * ref[round(.9 * len(ref) + i)]
+
+    future[0] = (future[0] + 1) * recent_reference[0]
+    recent_data[0] = (recent_data[0] + 1) * recent_reference[0]
+
+    # plot historical predictions
+    print("PLOTTING")
+    for i in range(0, len(p)):
+        if i % (target_len*2) == 0:
+            plot_index = i #for filling plot indexes
+            plot_indexes = []
+            plot_values = p[i]
+            for j in range(0, target_len):
+                plot_indexes.append(plot_index)
+                plot_index += 1
+            plt.plot(plot_indexes, plot_values, color="red")
+
+    # plot historical actual
+    plt.plot(y_test[:, 0], color='blue', label='Actual') # actual stock price history
+
+    # plot recent prices
+    plot_indexes = [len(y_test) - 1]
+    plot_values = [y_test[-1, 0]]
+    plot_index = None
+    for i in range(0, len(recent_data[0])):
+        plot_values.append(recent_data[0][i][0])
+        plot_index = len(y_test) + i
+        plot_indexes.append(len(y_test)+i)
+    plt.plot(plot_indexes, plot_values, color='blue')
+
+    # plot future predictions
+    plot_indexes = [plot_index]
+    plot_values = [recent_data[0][-1][0]]
+    for i in range(0, len(future[0])):
+        plot_index += 1
+        plot_values.append(future[0][i])
+        plot_indexes.append(plot_index)
+    plt.plot(plot_indexes, plot_values, color="red", label="Prediction")
+
+    #show/save plot
+    print("SENDING EMAILS")
+    plt.legend(loc="upper left")
+    plt.title(stock_name + " Price Predictions")
+    plt.xlabel("Days")
+    plt.ylabel("Price ($)")
+    filename = stock_name + "_" + str(arrow.utcnow().format("YYYY-MM-DD") + "_" + str(days_back) + "_Sentiment")
+    plt.savefig("graphs/" + filename)
+    #plt.show()
+    plt.close()
+    send_email(filename)
+
+    return True
+
+
+
+
+
+
 # MAIN()
 
-stock_name = 'GOOGL'
-df, sentiments = get_stock_data(stock_name, 0)
+tickers = read_stocks("ftp://ftp.nasdaqtrader.com/symboldirectory/nasdaqlisted.txt")
+num_days_back = 150
 
-window = 10
-X_train, y_train, X_test, y_test, ref = load_data(df[::-1], window, sentiments, train_percent=.9)
+for ticker in tickers:
+    print("Ticker:" + str(ticker))
 
-print("X_train", X_train.shape)
-print("y_train", y_train.shape)
-print("X_test", X_test.shape)
-print("y_test", y_test.shape)
+    try:
+        isDone = generate_graph(ticker, num_days_back, 10, 3, 50)
+    except quandl.errors.quandl_error.NotFoundError:
+        continue
 
-
-model = build_model([3, window, 1])
-
-model.fit(
-    X_train,
-    y_train,
-    batch_size=512,
-    epochs=1,
-    validation_split=0.1,
-    verbose=2)
-
-
-trainScore = model.evaluate(X_train, y_train, verbose=100)
-print('Train Score: %.2f MSE (%.2f RMSE) (%.2f)' % (trainScore[0], math.sqrt(trainScore[0]), trainScore[1]))
-
-testScore = model.evaluate(X_test, y_test, verbose=100)
-print('Test Score: %.2f MSE (%.2f RMSE) (%.2f)' % (testScore[0], math.sqrt(testScore[0]), testScore[1]))
-
-p = model.predict(X_test)
-
-
-# document results in file
-file = open("log.txt", "w")
-for i in range(0, len(X_train)):
-    for s in range(0, window):
-        file.write(str(X_train[i][s]) + "\n")
-    file.write("Target: " + str(y_train[i]) + "\n")
-    file.write("\n")
-
-for i in range(0, len(X_test)):
-    for s in range(0, window):
-        file.write(str(X_test[i][s]) + "\n")
-    file.write("Target: " + str(y_test[i]) + "\n")
-    file.write("Prediction: " + str(p[i]) + "\n")
-    file.write("\n")
-
-
-# de-normalize
-for i in range(0, len(p)):
-    p[i] = (p[i] + 1) * ref[int(.9 * len(ref) + i)]
-    y_test[i] = (y_test[i] + 1 * ref[int(.9 * len(ref) + i)])
-
-# plot
-plt.plot(p, color='red', label='prediction')
-plt.plot(y_test, color='blue', label='y_test')
-plt.legend(loc='upper left')
-plt.show()
+    # generate_graph(ticker, 300, 20, 10) #FOR TESTING

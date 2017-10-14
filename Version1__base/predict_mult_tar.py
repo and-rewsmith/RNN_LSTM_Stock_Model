@@ -1,12 +1,14 @@
 import math
+
+import arrow
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-from Version1__base.model_mult_tar import build_model
-import arrow
 import quandl
-from send_email import send_email
+
+from model import build_model
 from read_tickers import read_stocks
+from send_email import send_email
+
 np.set_printoptions(suppress=True)
 
 
