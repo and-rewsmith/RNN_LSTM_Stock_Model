@@ -118,8 +118,6 @@ def generate_graph(stock_name, days_back, num_timesteps, target_len, minimum_day
     print("    X_test", X_test.shape)
     print("    y_test", y_test.shape)
 
-    wait = input()
-
     # setup model
     print("TRAINING")
     model = build_model([6, num_timesteps, target_len])
