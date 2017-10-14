@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0da2773a-de99-484c-9153-ecb3ca595db1" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Version3__multiple_stocls(Under Development)/model_mult_dim.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Version1__base/model_mult_tar.py" afterPath="$PROJECT_DIR$/model.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Version2__twitter_sentiment/predict_with_tweets_2.py" afterPath="$PROJECT_DIR$/Version2__twitter_sentiment/predict_with_tweets.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Version1__base/predict_mult_tar.py" afterPath="$PROJECT_DIR$/Version1__base/predict_mult_tar.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/temp/.get-pip.py.swp" afterPath="$PROJECT_DIR$/misc(DEPRECATED)/.get-pip.py.swp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/temp/get-pip.py" afterPath="$PROJECT_DIR$/misc(DEPRECATED)/get-pip.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -239,11 +238,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/misc(DEPRECATED)" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/one_target" />
       <recent name="$PROJECT_DIR$/output_files" />
       <recent name="$PROJECT_DIR$/misc" />
-      <recent name="$PROJECT_DIR$/predict_with_tweets" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -501,9 +500,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="2560" y="824" width="1280" height="729" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22421876" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22421876" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32874617" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
