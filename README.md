@@ -26,7 +26,7 @@ General process is as follows:
 
 **got/got3**: Get Old Tweets. This repository can be found [here](https://github.com/Jefferson-Henrique/GetOldTweets-python).
 
-**img**: contains demo graphs.
+**img**: Contains demo graphs.
 
 **misc**: For implementations I might use later. For brainstorming.
 
