@@ -37,8 +37,10 @@ General process is as follows:
 **scratch.py**: Playground script.
 
 ## Performance Examples
+![Example_performance_3](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo3.png?raw=true "Example 3")
+
+![Example performance 2](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo2.png?raw=true "Example 2")
 
 ![Example performance 1](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo1.png?raw=true "Example 1")
 
-![Example performance 2](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo2.png?raw=true "Example 2")
 
