@@ -8,7 +8,7 @@ General process is as follows:
 
 1. Get stock data from Quandl (day-to-day data)
 
-2. Get twitter sentiment for each day represented in stock data
+2. Get stock twitter sentiment for each day
 
 3. Join data
 
@@ -26,7 +26,7 @@ General process is as follows:
 
 **got/got3**: Get Old Tweets. This repository can be found [here](https://github.com/Jefferson-Henrique/GetOldTweets-python).
 
-**img**: contains demo graphs.
+**img**: Contains demo graphs.
 
 **misc**: For implementations I might use later. For brainstorming.
 
