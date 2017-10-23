@@ -39,6 +39,12 @@ General process is as follows:
 ## Performance Examples
 ![Example_performance_3](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo3.png?raw=true "Example 3")
 
+![Example performance 4](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo4.png?raw=true "Example 4")
+
+![Example performance 5](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo5.png?raw=true "Example 5")
+
+![Example performance 6](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo6.png?raw=true "Example 6")
+
 ![Example performance 2](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo2.png?raw=true "Example 2")
 
 ![Example performance 1](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo1.png?raw=true "Example 1")
