@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0da2773a-de99-484c-9153-ecb3ca595db1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scratch.py" afterPath="$PROJECT_DIR$/scratch.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,18 +28,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="predict_with_tweets.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Version2__twitter_sentiment/predict_with_tweets.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1710">
-              <caret line="105" column="18" lean-forward="false" selection-start-line="105" selection-start-column="18" selection-end-line="105" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -59,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="predict_mult_tar.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="predict_mult_tar.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Version1__base/predict_mult_tar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="218" column="0" lean-forward="false" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
+            <state relative-caret-position="1764">
+              <caret line="107" column="10" lean-forward="false" selection-start-line="107" selection-start-column="10" selection-end-line="107" selection-end-column="10" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -91,13 +80,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scratch.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="scratch.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scratch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="27" lean-forward="false" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+            <state relative-caret-position="480">
+              <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="predict_with_tweets.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Version2__twitter_sentiment/predict_with_tweets.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1514">
+              <caret line="105" column="18" lean-forward="false" selection-start-line="105" selection-start-column="18" selection-end-line="105" selection-end-column="18" />
               <folding>
-                <element signature="e#0#12#0" expanded="true" />
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -132,6 +131,7 @@
       <find>get</find>
       <find>input</find>
       <find>total</find>
+      <find>recurse</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -172,7 +172,6 @@
         <option value="$PROJECT_DIR$/Version_1_base/model_mult_tar.py" />
         <option value="$PROJECT_DIR$/read_stocks.py" />
         <option value="$PROJECT_DIR$/Version_1_base/leetcode.py" />
-        <option value="$PROJECT_DIR$/scratch.py" />
         <option value="$PROJECT_DIR$/read_tickers.py" />
         <option value="$PROJECT_DIR$/temp/scratch2.py" />
         <option value="$PROJECT_DIR$/got3/manager/TweetManager.py" />
@@ -187,6 +186,7 @@
         <option value="$PROJECT_DIR$/send_email.py" />
         <option value="$PROJECT_DIR$/Version3__multiple_stocks(Under Development)/predict_mult_dim.py" />
         <option value="$PROJECT_DIR$/scratch2.py" />
+        <option value="$PROJECT_DIR$/scratch.py" />
       </list>
     </option>
   </component>
@@ -210,7 +210,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -240,6 +239,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -259,24 +259,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.scratch2">
-    <configuration default="false" name="date_handler" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Version_3_twitter_sentiment" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Stock_Predictions" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Version_3_twitter_sentiment/date_handler.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.scratch">
     <configuration default="false" name="predict_with_tweets_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -341,6 +324,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Stock_Predictions" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/belvedere_prblm2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="scratch" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Stock_Predictions" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scratch.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -480,19 +480,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.date_handler" />
-      <item index="1" class="java.lang.String" itemvalue="Python.predict_with_tweets_2" />
-      <item index="2" class="java.lang.String" itemvalue="Python.date_handler (1)" />
-      <item index="3" class="java.lang.String" itemvalue="Python.predict_with_tweets" />
-      <item index="4" class="java.lang.String" itemvalue="Python.scratch2" />
+      <item index="0" class="java.lang.String" itemvalue="Python.predict_with_tweets_2" />
+      <item index="1" class="java.lang.String" itemvalue="Python.date_handler (1)" />
+      <item index="2" class="java.lang.String" itemvalue="Python.predict_with_tweets" />
+      <item index="3" class="java.lang.String" itemvalue="Python.scratch2" />
+      <item index="4" class="java.lang.String" itemvalue="Python.scratch" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.scratch2" />
-        <item index="1" class="java.lang.String" itemvalue="Python.predict_with_tweets" />
-        <item index="2" class="java.lang.String" itemvalue="Python.date_handler (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Python.predict_with_tweets_2" />
-        <item index="4" class="java.lang.String" itemvalue="Python.date_handler" />
+        <item index="0" class="java.lang.String" itemvalue="Python.scratch" />
+        <item index="1" class="java.lang.String" itemvalue="Python.scratch2" />
+        <item index="2" class="java.lang.String" itemvalue="Python.predict_with_tweets" />
+        <item index="3" class="java.lang.String" itemvalue="Python.date_handler (1)" />
+        <item index="4" class="java.lang.String" itemvalue="Python.predict_with_tweets_2" />
       </list>
     </recent_temporary>
   </component>
@@ -511,14 +511,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1280" height="729" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22421876" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32874617" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27522936" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25076452" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -660,9 +660,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="26" lean-forward="true" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -727,16 +725,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Version2__twitter_sentiment/predict_with_tweets.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1710">
-          <caret line="105" column="18" lean-forward="false" selection-start-line="105" selection-start-column="18" selection-end-line="105" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Version3__multiple_stocks(Under Development)/predict_mult_dim.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -745,24 +733,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/belvedere_prblm2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="40" lean-forward="false" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scratch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="27" lean-forward="false" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/belvedere_prblm2.py" />
     <entry file="file://$PROJECT_DIR$/model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -773,11 +744,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Version1__base/predict_mult_tar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="218" column="0" lean-forward="false" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
+        <state relative-caret-position="1764">
+          <caret line="107" column="10" lean-forward="false" selection-start-line="107" selection-start-column="10" selection-end-line="107" selection-end-column="10" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Version2__twitter_sentiment/predict_with_tweets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1514">
+          <caret line="105" column="18" lean-forward="false" selection-start-line="105" selection-start-column="18" selection-end-line="105" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scratch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
