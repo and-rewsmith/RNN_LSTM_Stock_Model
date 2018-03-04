@@ -2,7 +2,7 @@
 
 ## Description
 
-This model uses stock data and twitter sentiment to generate a prediction of future market trends. It gathers sentiment from scraping the Twitter website. Unfortunately, one cannot use the Twitter API as tweets are only available in a window spanning back two weeks. 
+This model uses stock data and twitter sentiment to generate a prediction of future market trends. It gathers sentiment from scraping the Twitter website. Unfortunately, one cannot use the Twitter API as tweets are only available in a window spanning back two weeks. This [tool](https://github.com/Jefferson-Henrique/GetOldTweets-python) solves this problem.
 
 General process is as follows:
 
