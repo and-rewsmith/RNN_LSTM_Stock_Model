@@ -2,7 +2,7 @@
 
 ## Description
 
-This model uses stock data and twitter sentiment to generate a prediction of future market trends. It gathers sentiment from scraping the Twitter website. Unfortunately, the Twitter API is useless as it only provides tweets spanning back two weeks.
+This model uses stock data and twitter sentiment to generate a prediction of future market trends. It gathers sentiment from scraping the Twitter website. Unfortunately, one cannot use the Twitter API as tweets are only available in a window spanning back two weeks. This [tool](https://github.com/Jefferson-Henrique/GetOldTweets-python) solves this problem.
 
 General process is as follows:
 
@@ -37,6 +37,10 @@ General process is as follows:
 **scratch.py**: Playground script.
 
 ## Performance Examples
+![Example_performance_7](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo7.png?raw=true "Example 7")
+
+![Example_performance_8](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo8.png?raw=true "Example 8")
+
 ![Example_performance_3](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo3.png?raw=true "Example 3")
 
 ![Example performance 4](https://github.com/als5ev/RNN_LSTM_Stock_Model/blob/master/img/demo4.png?raw=true "Example 4")
