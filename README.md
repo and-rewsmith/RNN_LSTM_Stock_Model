@@ -22,8 +22,6 @@ General process is as follows:
 
 **Version2__twitter_sentiment**: Contains full functionality. Makes predictions with sentiment analysis included.
 
-**Version3__multiple_stocks(Under Development)**: Work in progress. I plan on this being Version2 with multiple stock pricing data per predictions (for a single stock).
-
 **got/got3**: Get Old Tweets. This repository can be found [here](https://github.com/Jefferson-Henrique/GetOldTweets-python).
 
 **img**: Contains demo graphs.
